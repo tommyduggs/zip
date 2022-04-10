@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour
     public float bounceForce = 18f;
     private float playerInitialPosX;
     private bool isPlayerHurt = false;
+    private Dictionary<string,int> MOVE_KEYS = new Dictionary<string, int>();
 
     // Start is called before the first frame update
     void Start()
@@ -54,7 +56,15 @@ public class PlayerController : MonoBehaviour
 
         playerInitialPosX = transform.position.x - 1.0f;
 
+        LoadSettings();
+
         Run();
+    }
+
+    private void LoadSettings()
+    {
+        Debug.Log("Loading Settings");
+        MOVE_KEYS.Add("Jump", PlayerPrefs.HasKey("Jump") ? PlayerPrefs.GetInt("Jump") : (int)KeyCode.Q);
     }
 
     // Update is called once per frame
@@ -74,7 +84,7 @@ public class PlayerController : MonoBehaviour
     {
         if(!gameManager.menuOpen)
         {
-            if(Input.GetKeyDown(KeyCode.Q))
+            if(Input.GetKeyDown((KeyCode)MOVE_KEYS["Jump"]))
             {
                 Jump();
             }
@@ -92,6 +102,12 @@ public class PlayerController : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.R))
             {
                 Slide();
+            }
+            // TODO DELETE
+            if(Input.GetKeyDown(KeyCode.G))
+            {
+                int testValue = PlayerPrefs.GetInt("Jump");
+                Debug.Log((KeyCode)testValue);
             }
         }
     }
