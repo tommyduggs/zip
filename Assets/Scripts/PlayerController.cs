@@ -65,6 +65,9 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Loading Settings");
         MOVE_KEYS.Add("Jump", PlayerPrefs.HasKey("Jump") ? PlayerPrefs.GetInt("Jump") : (int)KeyCode.Q);
+        MOVE_KEYS.Add("Float", PlayerPrefs.HasKey("Float") ? PlayerPrefs.GetInt("Float") : (int)KeyCode.W);
+        MOVE_KEYS.Add("Torpedo", PlayerPrefs.HasKey("Torpedo") ? PlayerPrefs.GetInt("Torpedo") : (int)KeyCode.E);
+        MOVE_KEYS.Add("Slide", PlayerPrefs.HasKey("Slide") ? PlayerPrefs.GetInt("Slide") : (int)KeyCode.R);
     }
 
     // Update is called once per frame
@@ -89,17 +92,17 @@ public class PlayerController : MonoBehaviour
                 Jump();
             }
 
-            if(Input.GetKeyDown(KeyCode.W))
+            if(Input.GetKeyDown((KeyCode)MOVE_KEYS["Float"]))
             {
                 FloatJump();
             }
 
-            if(Input.GetKeyDown(KeyCode.E))
+            if(Input.GetKeyDown((KeyCode)MOVE_KEYS["Torpedo"]))
             {
                 TorpedoJump();
             }
 
-            if(Input.GetKeyDown(KeyCode.R))
+            if(Input.GetKeyDown((KeyCode)MOVE_KEYS["Slide"]))
             {
                 Slide();
             }
