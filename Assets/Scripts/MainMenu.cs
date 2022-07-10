@@ -17,10 +17,8 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
         eventSystem = EventSystem.current;
-        
-        // TODO Put this in some "load defaults" function
-        PlayerPrefs.SetInt("Jump",(int)KeyCode.Q);
     }
+    
     public void StartGame()
     {
         SceneManager.LoadScene("Game");
